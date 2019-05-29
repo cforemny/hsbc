@@ -1,0 +1,10 @@
+WELCOME TO MY HSBC RECRUITMENT TASK.
+
+You can run the application using main method in Application class. It based on spring boot so you dont need to use any external tools.
+After application start go to below address in your browser:
+
+http://localhost:8080/
+
+You can find there couple methods for managing the employee repository. Put your data into inputs and execute by pressing the proper button.
+
+In test and integration packages you can find couple basic tests. Not all scenarios are covered by tests but I hope that's enough for this task.

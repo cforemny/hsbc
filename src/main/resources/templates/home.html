@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <style>
+        div {
+            border: 1px solid black;
+            margin-top: 100px;
+            margin-bottom: 100px;
+            margin-right: 150px;
+            margin-left: 80px;
+            background-color: lightblue;
+        }
+    </style>
+    <script>
+        function addEmployee() {
+            var name = document.getElementById('employeeNameAdd').value;
+            var surName = document.getElementById('employeeSurnameAdd').value;
+            var grade = document.getElementById('employeeGradeAdd').value;
+            var redirectUrl ="new?name=" + name + '&surName=' + surName + '&grade=' + grade;
+            window.location.replace(redirectUrl);
+        }
+
+        function updateEmployee() {
+            var id = document.getElementById('employeeIdUpdate').value;
+            var name = document.getElementById('employeeNameUpdate').value;
+            var surName = document.getElementById('employeeSurnameUpdate').value;
+            var grade = document.getElementById('employeeGradeUpdate').value;
+            var redirectUrl ="update?name=" + name + '&surName=' + surName + '&grade=' + grade + '&id=' + id;
+            window.location.replace(redirectUrl);
+        }
+
+        function findEmployee() {
+            var id = document.getElementById('employeeId').value;
+            var redirectUrl = "find?id=" + id;
+            window.location.replace(redirectUrl);
+
+        }
+
+        function findEmployeeWithParams() {
+                var name = document.getElementById('employeeName').value;
+                var surName = document.getElementById('employeeSurname').value;
+                var grade = document.getElementById('employeeGrade').value;
+                var redirectUrl ="findWithParam?name=" + name + '&surName=' + surName + '&grade=' + grade;
+            window.location.replace(redirectUrl);
+
+        }
+
+        function deleteEmployee() {
+            var id = document.getElementById('employeeIdDelete').value;
+            var redirectUrl = "delete?id=" + id;
+            window.location.replace(redirectUrl);
+        }
+    </script>
+</head>
+<body>
+<div th:fragment="header" id="header">
+    <section class="banner" role="banner" style="margin-left: 13%; margin-top: 2%">
+        <h3>HSBC Employee Manager</h3>
+    </section>
+</div>
+<div id="addEmployee">
+    <header>
+        Add new employee:
+    </header>
+    <input id="employeeNameAdd"
+           placeholder="Employee name" type="text"/>
+    <input id="employeeSurnameAdd"
+    placeholder="Employee surname" type="text"/>
+    <input id="employeeGradeAdd"
+    placeholder="Employee grade" type="text"/>
+    <button onclick="addEmployee()">Add employee</button>
+    <p th:text="${newAddedEmployee}"></p>
+</div>
+
+<div id="findByIdDiv">
+    <header>
+        Find user by id:
+    </header>
+    <input id="employeeId"
+           placeholder="Employee id" type="text"/>
+    <button onclick="findEmployee()">Find employee</button><br/>
+    <p th:text="${employee}"></p>
+</div>
+
+<div id="findByParametersDiv">
+    <header>
+        Find user by multiple parameters:
+        - If you want to search all employees just click find button.
+    </header>
+    <input id="employeeName"
+           placeholder="Employee name" type="text"/>
+    <input id="employeeSurname"
+           placeholder="Employee surname" type="text"/>
+    <input id="employeeGrade"
+           placeholder="Employee grade" type="text"/>
+    <button onclick="findEmployeeWithParams()">Find employees</button><br/>
+    <p th:each="employee : ${employeesWithParams}" th:text="${employee}"></p>
+</div>
+<div id="deleteByIdDiv">
+    <header>
+        Delete user by id:
+    </header>
+    <input id="employeeIdDelete"
+           placeholder="Employee id" type="text"/>
+    <button onclick="deleteEmployee()">Delete employee</button><br/>
+    <p th:text="${deletedEmployee}"></p>
+</div>
+
+<div id="updateByIdDiv">
+    <header>
+        Update:
+    </header>
+    <input id="employeeIdUpdate"
+           placeholder="Employee id" type="text"/>
+    <input id="employeeNameUpdate"
+           placeholder="Employee name" type="text"/>
+    <input id="employeeSurnameUpdate"
+           placeholder="Employee surname" type="text"/>
+    <input id="employeeGradeUpdate"
+           placeholder="Employee grade" type="text"/>
+    <button onclick="updateEmployee()">Update employee</button><br/>
+    <p th:text="${originalEmployee}"></p>
+    <p th:text="${updatedEmployee}"></p>
+</div>
+
+</body>
+</html>
