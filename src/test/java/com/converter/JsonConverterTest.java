@@ -7,14 +7,14 @@ import static org.junit.Assert.*;
 
 public class JsonConverterTest {
 
-private static final String EMPLOYEE_JSON = "{\"id\":null,\"grade\":2,\"name\":\"Aleksandra\",\"surName\":\"Zajac\"}";
+private static final String EMPLOYEE_JSON = "{\"id\":null,\"grade\":2,\"salary\":4000,\"name\":\"Aleksandra\",\"surName\":\"Zajac\"}";
 private static final String EMPLOYEE_JSON_NULL = "null";
 
     @Test
     public void convertEmployeeToJson() {
         //given
         JsonConverter jsonConverter = new JsonConverter();
-        Employee employee = new Employee(2, "Aleksandra", "Zajac");
+        Employee employee = new Employee(2, "Aleksandra", "Zajac",4000);
         //when
         String result = jsonConverter.convertEmployeeToJson(employee);
         //then

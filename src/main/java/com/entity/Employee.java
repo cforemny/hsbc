@@ -8,21 +8,23 @@ import java.util.Objects;
 public class Employee {
 
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     @Column(name = "grade", nullable = false)
     private Integer grade;
+    @Column(name = "salary", nullable = false)
+    private Integer salary;
     @Column(name = "name", nullable = false, length = 30)
     private String name;
     @Column(name = "surname", nullable = false, length = 40)
     private String surName;
 
 
-
-    public Employee(Integer grade, String name, String surName) {
+    public Employee(Integer grade, String name, String surName, Integer salary) {
         this.grade = grade;
         this.name = name;
         this.surName = surName;
+        this.salary = salary;
     }
 
     public Employee() {
@@ -60,9 +62,19 @@ public class Employee {
         this.surName = surName;
     }
 
+    public Integer getSalary() {
+        return salary;
+    }
+
+    public void setSalary(Integer salary) {
+        this.salary = salary;
+    }
+
     @Override
     public String toString() {
-        return  new StringBuilder("ID: ").append(this.id).append(" Name: ").append(this.name).append(" Surname: ").append(this.surName).append(" Grade: ").append(this.grade).toString() ;
+        return new StringBuilder("ID: ").append(this.id).append(" Name: ").append(this.name).append(" Surname: ")
+                .append(this.surName).append(" Grade: ").append(this.grade)
+                .append(" Salary: ").append(this.salary).toString();
     }
 
     @Override
@@ -70,13 +82,14 @@ public class Employee {
         if (this == o) return true;
         if (!(o instanceof Employee)) return false;
         Employee employee = (Employee) o;
-        return  grade.equals(employee.grade) &&
+        return grade.equals(employee.grade) &&
+                salary.equals(employee.salary) &&
                 name.equals(employee.name) &&
                 surName.equals(employee.surName);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, grade, name, surName);
+        return Objects.hash(id, grade, salary, name, surName);
     }
 }

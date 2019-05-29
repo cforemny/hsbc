@@ -27,7 +27,7 @@ public class EmployeeDaoTest {
         //given
 
         //when
-        Integer employeeId = employeeDao.addEmployee(new Employee(3, "Vanessa", "Suarez"));
+        Integer employeeId = employeeDao.addEmployee(new Employee(3, "Vanessa", "Suarez",15000));
         Employee result = employeeDao.findEmployeeById(employeeId);
         //then
         assert result != null;
@@ -37,7 +37,7 @@ public class EmployeeDaoTest {
     public void addEmployeeTest() {
 
         //given
-        Employee employee = new Employee(3, "Barbara", "Chrzanowska");
+        Employee employee = new Employee(3, "Barbara", "Chrzanowska",15000);
         //when
         Integer employeeId = employeeDao.addEmployee(employee);
         //then
@@ -48,8 +48,8 @@ public class EmployeeDaoTest {
     public void updateEmployeeTest() {
 
         //given
-        Employee employee = new Employee(2, "Barbara", "Nowacka");
-        Employee employeeUpdated = new Employee(2, "Barbara", "Nowacka-Pierog");
+        Employee employee = new Employee(2, "Barbara", "Nowacka",7000);
+        Employee employeeUpdated = new Employee(2, "Barbara", "Nowacka-Pierog",7000);
         Integer employeeId = employeeDao.addEmployee(employee);
         //when
         employeeDao.updateEmployee(employeeId, employeeUpdated);
@@ -62,7 +62,7 @@ public class EmployeeDaoTest {
         //given
 
         //when
-        Employee employee = new Employee(3, "Barbara", "Chrzanowska");
+        Employee employee = new Employee(3, "Barbara", "Chrzanowska",15000);
         Integer employeeId = employeeDao.addEmployee(employee);
         assert employee.equals(employeeDao.findEmployeeById(employeeId));
         employeeDao.deleteEmployeeById(employeeId);
@@ -76,8 +76,8 @@ public class EmployeeDaoTest {
         //given
 
         //when
-        Employee employee = new Employee(3, "Barbara", "Chrzanowska");
-        Employee employee1 = new Employee(1, "Paul", "McDonald");
+        Employee employee = new Employee(3, "Barbara", "Chrzanowska",15000);
+        Employee employee1 = new Employee(1, "Paul", "McDonald",4000);
         employeeDao.addEmployee(employee);
         employeeDao.addEmployee(employee1);
         List<Employee> result = employeeDao.findAllEmployees();
@@ -91,9 +91,9 @@ public class EmployeeDaoTest {
         //given
 
         //when
-        employeeDao.addEmployee( new Employee(3, "Monika", "Chrzanowska"));
-        employeeDao.addEmployee( new Employee(3, "Monika", "Nowicka"));
-        List<Employee> result = employeeDao.findAllEmployeesWithParameters("Monika", null, null);
+        employeeDao.addEmployee( new Employee(3, "Monika", "Chrzanowska",15000));
+        employeeDao.addEmployee( new Employee(3, "Monika", "Nowicka",15000));
+        List<Employee> result = employeeDao.findAllEmployeesWithParameters("Monika", null, null,null);
         //then
         assert result.size() == 2;
     }

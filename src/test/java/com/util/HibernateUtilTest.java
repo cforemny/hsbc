@@ -21,6 +21,7 @@ public class HibernateUtilTest {
         emp.setGrade(4);
         emp.setName("Jan");
         emp.setSurName("Kowalski");
+        emp.setSalary(25000);
         session.save(emp);
         session.getTransaction().commit();
         HibernateUtil.closeSession();

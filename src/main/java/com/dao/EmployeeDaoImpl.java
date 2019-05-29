@@ -48,6 +48,7 @@ public class EmployeeDaoImpl implements EmploeeDao {
             employee.setName(newEmployee.getName());
             employee.setSurName(newEmployee.getSurName());
             employee.setGrade(newEmployee.getGrade());
+            employee.setSalary(newEmployee.getSalary());
             session.update(employee);
             transaction.commit();
         } catch (HibernateException e) {
@@ -89,7 +90,7 @@ public class EmployeeDaoImpl implements EmploeeDao {
     }
 
 
-    public List<Employee> findAllEmployeesWithParameters(String name, String surName, Integer grade) {
+    public List<Employee> findAllEmployeesWithParameters(String name, String surName, Integer grade, Integer salary) {
         try (Session session = HibernateUtil.getSessionFactory().openSession()) {
 
             List<Employee> employees = session.createQuery("FROM Employee", Employee.class).list();
@@ -103,6 +104,9 @@ public class EmployeeDaoImpl implements EmploeeDao {
             }
             if (grade != null  && !"".equals(grade)) {
                 employeesStream = employeesStream.filter(employee -> employee.getGrade().equals(grade));
+            }
+            if (salary != null  && !"".equals(salary)) {
+                employeesStream = employeesStream.filter(employee -> employee.getSalary().equals(salary));
             }
             return employeesStream.collect(Collectors.toList());
         }

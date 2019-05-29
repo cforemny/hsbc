@@ -16,7 +16,8 @@
             var name = document.getElementById('employeeNameAdd').value;
             var surName = document.getElementById('employeeSurnameAdd').value;
             var grade = document.getElementById('employeeGradeAdd').value;
-            var redirectUrl ="new?name=" + name + '&surName=' + surName + '&grade=' + grade;
+            var salary = document.getElementById('employeeSalaryAdd').value;
+            var redirectUrl = "new?name=" + name + '&surName=' + surName + '&grade=' + grade + '&salary=' + salary;
             window.location.replace(redirectUrl);
         }
 
@@ -25,7 +26,9 @@
             var name = document.getElementById('employeeNameUpdate').value;
             var surName = document.getElementById('employeeSurnameUpdate').value;
             var grade = document.getElementById('employeeGradeUpdate').value;
-            var redirectUrl ="update?name=" + name + '&surName=' + surName + '&grade=' + grade + '&id=' + id;
+            var salary = document.getElementById('employeeSalaryUpdate').value;
+            var redirectUrl = "update?name=" + name + '&surName=' + surName + '&grade=' + grade + '&id=' + id
+                + '&salary=' + salary;
             window.location.replace(redirectUrl);
         }
 
@@ -37,10 +40,11 @@
         }
 
         function findEmployeeWithParams() {
-                var name = document.getElementById('employeeName').value;
-                var surName = document.getElementById('employeeSurname').value;
-                var grade = document.getElementById('employeeGrade').value;
-                var redirectUrl ="findWithParam?name=" + name + '&surName=' + surName + '&grade=' + grade;
+            var name = document.getElementById('employeeName').value;
+            var surName = document.getElementById('employeeSurname').value;
+            var grade = document.getElementById('employeeGrade').value;
+            var salary = document.getElementById('employeeSalary').value;
+            var redirectUrl = "findWithParam?name=" + name + '&surName=' + surName + '&grade=' + grade + '&salary=' + salary;
             window.location.replace(redirectUrl);
 
         }
@@ -65,9 +69,11 @@
     <input id="employeeNameAdd"
            placeholder="Employee name" type="text"/>
     <input id="employeeSurnameAdd"
-    placeholder="Employee surname" type="text"/>
+           placeholder="Employee surname" type="text"/>
     <input id="employeeGradeAdd"
-    placeholder="Employee grade" type="text"/>
+           placeholder="Employee grade" type="text"/>
+    <input id="employeeSalaryAdd"
+           placeholder="Employee salary" type="text"/>
     <button onclick="addEmployee()">Add employee</button>
     <p th:text="${newAddedEmployee}"></p>
 </div>
@@ -78,14 +84,15 @@
     </header>
     <input id="employeeId"
            placeholder="Employee id" type="text"/>
-    <button onclick="findEmployee()">Find employee</button><br/>
+    <button onclick="findEmployee()">Find employee</button>
+    <br/>
     <p th:text="${employee}"></p>
 </div>
 
 <div id="findByParametersDiv">
     <header>
-        Find user by multiple parameters:
-        - If you want to search all employees just click find button.
+        Find user by multiple parameters
+        - if you want to search all employees just click find button.
     </header>
     <input id="employeeName"
            placeholder="Employee name" type="text"/>
@@ -93,7 +100,10 @@
            placeholder="Employee surname" type="text"/>
     <input id="employeeGrade"
            placeholder="Employee grade" type="text"/>
-    <button onclick="findEmployeeWithParams()">Find employees</button><br/>
+    <input id="employeeSalary"
+           placeholder="Employee salary" type="text"/>
+    <button onclick="findEmployeeWithParams()">Find employees</button>
+    <br/>
     <p th:each="employee : ${employeesWithParams}" th:text="${employee}"></p>
 </div>
 <div id="deleteByIdDiv">
@@ -102,7 +112,8 @@
     </header>
     <input id="employeeIdDelete"
            placeholder="Employee id" type="text"/>
-    <button onclick="deleteEmployee()">Delete employee</button><br/>
+    <button onclick="deleteEmployee()">Delete employee</button>
+    <br/>
     <p th:text="${deletedEmployee}"></p>
 </div>
 
@@ -118,7 +129,10 @@
            placeholder="Employee surname" type="text"/>
     <input id="employeeGradeUpdate"
            placeholder="Employee grade" type="text"/>
-    <button onclick="updateEmployee()">Update employee</button><br/>
+    <input id="employeeSalaryUpdate"
+           placeholder="Employee salary" type="text"/>
+    <button onclick="updateEmployee()">Update employee</button>
+    <br/>
     <p th:text="${originalEmployee}"></p>
     <p th:text="${updatedEmployee}"></p>
 </div>

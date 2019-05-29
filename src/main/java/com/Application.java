@@ -20,10 +20,10 @@ public class Application {
 
     private static void fillUpEmployeeTable() {
 
-        employeeDao.addEmployee(new Employee(2, "Aleksandra", "Zajac"));
-        employeeDao.addEmployee(new Employee(1, "John", "Wick"));
-        employeeDao.addEmployee(new Employee(1, "Albert", "Kowalski"));
-        employeeDao.addEmployee(new Employee(3, "Brian", "Boglitz"));
-        employeeDao.addEmployee(new Employee(3, "Vanessa", "Suarez"));
+        employeeDao.addEmployee(new Employee(2, "Aleksandra", "Zajac",7000));
+        employeeDao.addEmployee(new Employee(1, "John", "Wick",4000));
+        employeeDao.addEmployee(new Employee(1, "Albert", "Kowalski",4000));
+        employeeDao.addEmployee(new Employee(3, "Brian", "Boglitz",15000));
+        employeeDao.addEmployee(new Employee(3, "Vanessa", "Suarez",15000));
     }
 }

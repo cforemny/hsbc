@@ -15,7 +15,7 @@ import java.util.stream.Collectors;
 @Controller
 public class EmployeeManagerController {
 
-    public static final String EMPTY_GRADE = "";
+    public static final String EMPTY_PARAM= "";
     @Autowired
     private EmployeeDaoImpl employeeDao;
     @Autowired
@@ -34,24 +34,28 @@ public class EmployeeManagerController {
     }
 
     @GetMapping("/findWithParam")
-    public String findWithParam(Model model, @RequestParam String name, @RequestParam String surName, @RequestParam String grade) {
-        Integer gradeInt = EMPTY_GRADE.equals(grade) ? null : Integer.valueOf(grade);
-        List<Employee> allEmployeesWithParameters = employeeDao.findAllEmployeesWithParameters(name, surName, gradeInt);
+    public String findWithParam(Model model, @RequestParam String name, @RequestParam String surName, @RequestParam String grade,
+                                @RequestParam String salary) {
+        Integer gradeInt = EMPTY_PARAM.equals(grade) ? null : Integer.valueOf(grade);
+        Integer salaryInt = EMPTY_PARAM.equals(salary) ? null : Integer.valueOf(salary);
+        List<Employee> allEmployeesWithParameters = employeeDao.findAllEmployeesWithParameters(name, surName, gradeInt, salaryInt);
         model.addAttribute("employeesWithParams", allEmployeesWithParameters.stream().map(employee -> jsonConverter.convertEmployeeToJson(employee)).collect(Collectors.toList()));
         return "home";
     }
 
     @GetMapping("/new")
-    public String addEmployee(Model model, @RequestParam String name, @RequestParam String surName, @RequestParam String grade) {
-        Integer employeeId = employeeDao.addEmployee(new Employee(Integer.valueOf(grade), name, surName));
+    public String addEmployee(Model model, @RequestParam String name, @RequestParam String surName, @RequestParam String grade,
+                              @RequestParam String salary) {
+        Integer employeeId = employeeDao.addEmployee(new Employee(Integer.valueOf(grade), name, surName,Integer.valueOf(salary)));
         model.addAttribute("newAddedEmployee", "Added new employee: " + jsonConverter.convertEmployeeToJson(employeeDao.findEmployeeById(employeeId)));
         return "home";
     }
 
     @GetMapping("/update")
-    public String updateEmployee(Model model, @RequestParam String id, @RequestParam String name, @RequestParam String surName, @RequestParam String grade) {
+    public String updateEmployee(Model model, @RequestParam String id, @RequestParam String name, @RequestParam String surName,
+                                 @RequestParam String grade,@RequestParam String salary) {
         model.addAttribute("originalEmployee", "Original Employee: " + jsonConverter.convertEmployeeToJson(employeeDao.findEmployeeById(Integer.valueOf(id))));
-        employeeDao.updateEmployee(Integer.valueOf(id), new Employee(Integer.valueOf(grade), name, surName));
+        employeeDao.updateEmployee(Integer.valueOf(id), new Employee(Integer.valueOf(grade), name, surName,Integer.valueOf(salary)));
         model.addAttribute("updatedEmployee", "Updated employee: " + jsonConverter.convertEmployeeToJson(employeeDao.findEmployeeById(Integer.valueOf(id))));
         return "home";
     }
